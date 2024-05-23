@@ -5,6 +5,11 @@ import { useEffect, useState } from "react";
 import db from "./firebase";
 import { onSnapshot, collection } from 'firebase/firestore';
 
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Link from '@mui/material/Link';
+import ListItemText from '@mui/material/ListItemText';
+
 export default function App() {
   const [articles, setArticles] = useState([]);
   useEffect(
@@ -15,17 +20,14 @@ export default function App() {
     []
   );
 
-  console.log("articles");
-  console.log(articles);
-
   return (
     <div className="App">
       <h1>News Articles</h1>
-      <ul>
-        {articles.map((article) => (<li key={article.value}>
-          <a href={article.link}>{article.link}</a>
-          </li>))}
-      </ul>
+      <List>
+        {articles.map((article) => <ListItem key={article.value}>
+          <Link href={article.link}>{article.link}</Link>
+        </ListItem>)}
+      </List>
     </div>
   );
 }
